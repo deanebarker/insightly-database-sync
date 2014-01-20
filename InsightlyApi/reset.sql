@@ -1,0 +1,4 @@
+﻿TRUNCATE TABLE Contacts
+TRUNCATE TABLE Organizations
+TRUNCATE TABLE Projects
+TRUNCATE TABLE Tags
