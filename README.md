@@ -66,6 +66,10 @@ Each time the program executes, it saves the downloaded XML inside a directory c
 
 _The properties of your classes (and subsequent database columns) don't have to mirror the XML elements_.  You can return whatever you want from the properties and it will write to the database column.  So you can combine XML elements into one field, check values and return constants, even do external lookups and return that.  The system will write whatever that property returns into your database field, so go nuts.  (For an example, see the "Name" property in the "InsightlyContact" class.)
 
+License
+-------
+This is free and unencumbered software released into the public domain.
+
 Warning
 ---------
 This code is rough. It has been used internally only, and as of January 2014 has never been reviewed or used outside my organization.  It has been very stable for us, but I provide absolutely no warranty, and you should probably expect the worst.
