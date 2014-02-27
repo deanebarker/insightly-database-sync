@@ -14,12 +14,17 @@ namespace InsightlyApi.InsightlyObjects
 
         }
 
+        public override string Id
+        {
+            get { return GetValue(".//{0}ORGANISATION_ID"); }
+        }
+
         [InsightlyColumnMapping]
         public string Name
         {
             get
             {
-                return GetValue(".//ORGANISATION_NAME");
+                return GetValue(".//{0}ORGANISATION_NAME");
             }
         }
 
@@ -28,7 +33,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return String.Concat(GetValue(".//ADDRESSES/Address/CITY"), ", ", GetValue(".//ADDRESSES/Address/STATE")).Trim(new char[] { ' ', ',' });
+                return String.Concat(GetValue(".//{0}ADDRESSES/{0}Address/{0}CITY"), ", ", GetValue(".//{0}ADDRESSES/{0}Address/{0}STATE")).Trim(new char[] { ' ', ',' });
             }
         }
 
@@ -37,7 +42,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//ContactInfo[TYPE='WEBSITE']/DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='WEBSITE']/{0}DETAIL");
             }
         }
 
@@ -47,7 +52,7 @@ namespace InsightlyApi.InsightlyObjects
             get
             {
                 // Only send the ID back if it's different -- don't create self-referential links
-                var parentId = GetValue(".//OrganisationLink[RELATIONSHIP_ID='7']/SECOND_ORGANISATION_ID");
+                var parentId = GetValue(".//{0}OrganisationLink[{0}RELATIONSHIP_ID='7']/{0}SECOND_ORGANISATION_ID");
                 if (parentId != Id)
                 {
                     return parentId;

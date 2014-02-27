@@ -15,12 +15,17 @@ namespace InsightlyApi.InsightlyObjects
 
         }
 
+        public override string Id
+        {
+            get { return GetValue(".//{0}PROJECT_ID"); }
+        }
+
         [InsightlyColumnMapping]
         public string Name
         {
             get
             {
-                return GetValue(".//PROJECT_NAME");
+                return GetValue(".//{0}PROJECT_NAME");
             }
         }
 
@@ -29,7 +34,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//Link[ORGANISATION_ID[text()]]/ORGANISATION_ID");
+                return GetValue(".//{0}Link[{0}ORGANISATION_ID[text()]]/{0}ORGANISATION_ID");
             }
         }
     }

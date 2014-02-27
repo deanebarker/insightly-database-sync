@@ -14,12 +14,17 @@ namespace InsightlyApi.InsightlyObjects
         {
         }
 
+        public override string Id
+        {
+            get { return GetValue(".//insightly:CONTACT_ID"); }
+        }
+
         [InsightlyColumnMapping]
         public string Name
         {
             get
             {
-                return String.Concat(GetValue(".//FIRST_NAME"), " ", GetValue(".//LAST_NAME")).Trim();
+                return String.Concat(GetValue(".//{0}FIRST_NAME"), " ", GetValue(".//{0}LAST_NAME")).Trim();
             }
         }
 
@@ -28,7 +33,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//CONTACTINFOS/ContactInfo[TYPE='EMAIL']/DETAIL");
+                return GetValue(".//{0}CONTACTINFOS/{0}ContactInfo[{0}TYPE='EMAIL']/{0}DETAIL");
             }
         }
 
@@ -37,7 +42,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//DEFAULT_LINKED_ORGANISATION");
+                return GetValue(".//{0}DEFAULT_LINKED_ORGANISATION");
             }
         }
 
@@ -46,7 +51,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//Link[ORGANISATION_ID[text()] and ROLE[text()]]/ROLE");
+                return GetValue(".//{0}Link[{0}ORGANISATION_ID[text()] and {0}ROLE[text()]]/{0}ROLE");
             }
         }
 
@@ -55,7 +60,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//ContactInfo[SUBTYPE = 'LinkedInPublicProfileUrl']/DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}SUBTYPE = 'LinkedInPublicProfileUrl']/{0}DETAIL");
             }
         }
 
@@ -64,7 +69,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//ContactInfo[TYPE='PHONE' and LABEL='Work']/DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Work']/{0}DETAIL");
             }
         }
 
@@ -73,7 +78,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//ContactInfo[TYPE='PHONE' and LABEL='Mobile']/DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Mobile']/{0}DETAIL");
             }
         }
     }

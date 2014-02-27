@@ -135,8 +135,12 @@ namespace InsightlyApi
                         }
                         else
                         {
-                            // Just use the default object
-                            mappingObject = new InsightlyObject(objectNode);
+                            // Just the default object
+                            
+                           // mappingObject = new InsightlyObject(objectNode);
+
+                            // 2014-02-27; Now we're just going to skip.  With v2 of the API, if we don't know what it is, we can no longer automatically get the ID...
+                            continue;
                         }
 
                         Log.Debug("Created object for " + objectNode.Name + "; ID: " + mappingObject.Id + "; Object Type: " + mappingObject.GetType().ToString());

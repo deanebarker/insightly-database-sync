@@ -9,30 +9,31 @@ using System.Xml;
 
 namespace InsightlyApi.InsightlyObjects
 {
-    public class InsightlyObject
+    public abstract class InsightlyObject
     {
-        protected XmlElement xml { get; set; }
+        protected XmlDocument xml { get; set; }
+        protected XmlNamespaceManager nsm { get; set; }
 
-        public string Id
-        {
-            get
-            {
-                return xml.ChildNodes[0].InnerText;
-            }
-        }
+        public abstract string Id { get; }
 
         public InsightlyObject(XmlElement incomingXml)
         {
-            xml = incomingXml;
+            xml = new XmlDocument();
+            xml.LoadXml(incomingXml.OuterXml);
+
+            nsm = new XmlNamespaceManager(xml.NameTable);
+            nsm.AddNamespace("insightly", "http://schemas.datacontract.org/2004/07/Insightly.API");
         }
 
         protected string GetValue(string xPath)
         {
+            xPath = String.Format(xPath, "insightly:");
+
             try
             {
-                if (xml.SelectSingleNode(xPath) != null)
+                if (xml.SelectSingleNode(xPath, nsm) != null)
                 {
-                    return xml.SelectSingleNode(xPath).InnerText;
+                    return xml.SelectSingleNode(xPath, nsm).InnerText;
                 }
             }
             catch (Exception e)
@@ -76,7 +77,7 @@ namespace InsightlyApi.InsightlyObjects
             }
 
             // Insert the tags
-            foreach (XmlNode tagNode in xml.SelectNodes(".//TAGS/Tag/TAG_NAME"))
+            foreach (XmlNode tagNode in xml.SelectNodes(".//insightly:TAGS/insightly:Tag/insightly:TAG_NAME", nsm))
             {
                 try
                 {
