@@ -54,6 +54,7 @@
     <Compile Include="InsightlyObjects\InsightlyObject.cs" />
     <Compile Include="InsightlyObjects\InsightlyOrganization.cs" />
     <Compile Include="InsightlyObjects\InsightlyProject.cs" />
+    <Compile Include="InsightlyObjects\InsightlyCategory.cs" />
     <Compile Include="InsightlyTableMapping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
