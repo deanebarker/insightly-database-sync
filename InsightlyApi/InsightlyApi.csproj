@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InsightlyObjects\InsightlyOpportunity.cs" />
     <Compile Include="InsightlyObjects\InsightlyContact.cs" />
     <Compile Include="InsightlyColumnMapping.cs" />
     <Compile Include="InsightlyObjects\InsightlyObject.cs" />

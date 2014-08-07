@@ -1,104 +1,115 @@
-﻿USE [master]
+﻿USE [Insightly]
 GO
-
-/****** Object:  Database [Insightly]    Script Date: 12/07/2013 14:00:25 ******/
-CREATE DATABASE [Insightly] ON  PRIMARY 
-( NAME = N'Insightly', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\Insightly.mdf' , SIZE = 7168KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
- LOG ON 
-( NAME = N'Insightly_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\Insightly_1.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+/****** Object:  Table [dbo].[Tags]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET COMPATIBILITY_LEVEL = 100
+SET QUOTED_IDENTIFIER ON
 GO
-
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [Insightly].[dbo].[sp_fulltext_database] @action = 'enable'
-end
+CREATE TABLE [dbo].[Tags](
+	[ObjectId] [nvarchar](max) NOT NULL,
+	[Tag] [nvarchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET ANSI_NULL_DEFAULT OFF 
+/****** Object:  Table [dbo].[Projects]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET ANSI_NULLS OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET ANSI_PADDING OFF 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [Insightly] SET ANSI_WARNINGS OFF 
+CREATE TABLE [dbo].[Projects](
+	[Id] [varchar](max) NOT NULL,
+	[OrgId] [varchar](50) NULL,
+	[Name] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET ARITHABORT OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [Insightly] SET AUTO_CLOSE OFF 
+/****** Object:  Table [dbo].[Organizations]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET AUTO_CREATE_STATISTICS ON 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET AUTO_SHRINK OFF 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [Insightly] SET AUTO_UPDATE_STATISTICS ON 
+CREATE TABLE [dbo].[Organizations](
+	[Id] [varchar](max) NOT NULL,
+	[ParentId] [varchar](max) NULL,
+	[Name] [varchar](max) NULL,
+	[CityState] [varchar](max) NULL,
+	[Url] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET CURSOR_CLOSE_ON_COMMIT OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [Insightly] SET CURSOR_DEFAULT  GLOBAL 
+/****** Object:  Table [dbo].[Opportunities]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET CONCAT_NULL_YIELDS_NULL OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET NUMERIC_ROUNDABORT OFF 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [Insightly] SET QUOTED_IDENTIFIER OFF 
+CREATE TABLE [dbo].[Opportunities](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](max) NULL,
+	[State] [varchar](max) NULL,
+	[Details] [varchar](max) NULL,
+	[Created] [datetime] NULL,
+	[Visibility] [varchar](max) NULL,
+ CONSTRAINT [PK_Opportunities] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET RECURSIVE_TRIGGERS OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [Insightly] SET  DISABLE_BROKER 
+/****** Object:  Table [dbo].[Objects]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET DATE_CORRELATION_OPTIMIZATION OFF 
+CREATE TABLE [dbo].[Objects](
+	[Id] [nvarchar](max) NOT NULL,
+	[Created] [datetime] NOT NULL,
+	[Type] [nvarchar](max) NOT NULL,
+	[Reported] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET TRUSTWORTHY OFF 
+/****** Object:  Table [dbo].[Contacts]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET PARAMETERIZATION SIMPLE 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [Insightly] SET READ_COMMITTED_SNAPSHOT OFF 
+CREATE TABLE [dbo].[Contacts](
+	[Id] [varchar](max) NOT NULL,
+	[OrgId] [varchar](50) NULL,
+	[Name] [varchar](max) NULL,
+	[Email] [varchar](max) NULL,
+	[Title] [varchar](max) NULL,
+	[WorkPhone] [varchar](max) NULL,
+	[MobilePhone] [varchar](max) NULL,
+	[LinkedInUrl] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET HONOR_BROKER_PRIORITY OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [Insightly] SET  READ_WRITE 
+/****** Object:  Table [dbo].[Categories]    Script Date: 08/07/2014 09:49:10 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [Insightly] SET RECOVERY SIMPLE 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [Insightly] SET  MULTI_USER 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [Insightly] SET PAGE_VERIFY CHECKSUM  
+CREATE TABLE [dbo].[Categories](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [Insightly] SET DB_CHAINING OFF 
+SET ANSI_PADDING OFF
 GO
-
-
+/****** Object:  Default [DF_Objects_Created]    Script Date: 08/07/2014 09:49:10 ******/
+ALTER TABLE [dbo].[Objects] ADD  CONSTRAINT [DF_Objects_Created]  DEFAULT (getdate()) FOR [Created]
+GO
