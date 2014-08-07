@@ -3,3 +3,4 @@ TRUNCATE TABLE Organizations
 TRUNCATE TABLE Projects
 TRUNCATE TABLE Tags
 TRUNCATE TABLE Categories
+TRUNCATE TABLE Opportunities
