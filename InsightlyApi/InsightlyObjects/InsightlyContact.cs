@@ -69,7 +69,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Work']/{0}DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='WORK']/{0}DETAIL");
             }
         }
 
@@ -78,7 +78,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Mobile']/{0}DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='MOBILE']/{0}DETAIL");
             }
         }
     }
