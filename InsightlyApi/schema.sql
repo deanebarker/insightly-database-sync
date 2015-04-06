@@ -1,6 +1,25 @@
 ﻿USE [Insightly]
 GO
-/****** Object:  Table [dbo].[Tags]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 08/07/2014 17:46:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Users](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](max) NULL,
+	[ContactId] [int] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Tags]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +29,7 @@ CREATE TABLE [dbo].[Tags](
 	[Tag] [nvarchar](max) NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Projects]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Projects]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +44,7 @@ CREATE TABLE [dbo].[Projects](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Organizations]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Organizations]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,7 +61,7 @@ CREATE TABLE [dbo].[Organizations](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Opportunities]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Opportunities]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -56,6 +75,7 @@ CREATE TABLE [dbo].[Opportunities](
 	[Details] [varchar](max) NULL,
 	[Created] [datetime] NULL,
 	[Visibility] [varchar](max) NULL,
+	[OwnerId] [int] NULL,
  CONSTRAINT [PK_Opportunities] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -64,7 +84,7 @@ CREATE TABLE [dbo].[Opportunities](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Objects]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Objects]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +96,7 @@ CREATE TABLE [dbo].[Objects](
 	[Reported] [datetime] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Contacts]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Contacts]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -91,12 +111,13 @@ CREATE TABLE [dbo].[Contacts](
 	[Title] [varchar](max) NULL,
 	[WorkPhone] [varchar](max) NULL,
 	[MobilePhone] [varchar](max) NULL,
-	[LinkedInUrl] [varchar](max) NULL
+	[LinkedInUrl] [varchar](max) NULL,
+	[Background] [varchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 08/07/2014 17:46:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,6 +131,6 @@ CREATE TABLE [dbo].[Categories](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Default [DF_Objects_Created]    Script Date: 08/07/2014 09:49:10 ******/
+/****** Object:  Default [DF_Objects_Created]    Script Date: 08/07/2014 17:46:21 ******/
 ALTER TABLE [dbo].[Objects] ADD  CONSTRAINT [DF_Objects_Created]  DEFAULT (getdate()) FOR [Created]
 GO
