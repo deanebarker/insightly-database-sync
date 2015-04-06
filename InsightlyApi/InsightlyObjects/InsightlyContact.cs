@@ -42,7 +42,14 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//{0}DEFAULT_LINKED_ORGANISATION");
+                var orgId = GetValue(".//{0}DEFAULT_LINKED_ORGANISATION");
+                if (String.IsNullOrWhiteSpace(orgId))
+                {
+                    // Sometimes this is NULL, even though they have an organization. If so, then check to see if they have a link to an organization. Take the first one.
+                    orgId = GetValue(".//{0}Link/{0}ORGANISATION_ID[text() != '']");
+                }
+
+                return orgId;
             }
         }
 
@@ -69,7 +76,7 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='WORK']/{0}DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Work']/{0}DETAIL");
             }
         }
 
@@ -78,7 +85,16 @@ namespace InsightlyApi.InsightlyObjects
         {
             get
             {
-                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='MOBILE']/{0}DETAIL");
+                return GetValue(".//{0}ContactInfo[{0}TYPE='PHONE' and {0}LABEL='Mobile']/{0}DETAIL");
+            }
+        }
+
+        [InsightlyColumnMapping]
+        public string Background
+        {
+            get
+            {
+                return GetValue(".//{0}BACKGROUND");
             }
         }
     }
